@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie add</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <script src="/js/moviesAddValidation.js" defer></script>
+</head>
+
+<body>
+    <figure>
+        <img src="/img/logo-DH.png" alt="Logo Digital House">
+      </figure>
+    <h1 class="moviesAddTitulo"></h1>
+    <br>
+    <section id="formulario" >
+        <article class="mostrarFormulario">
+            <ul class="errores">
+                
+            </ul>
+            <form class="form" action="/movies/create" method="POST">
+                <label for="title">Titulo </label>
+                <div>
+                    <input type="text" name="title" id="title"/>
+                    <p class="errorText">Titulo es requerido</p>
+                </div>
+                <label for="rating">Calificación </label>
+                <div>
+                    <input type="number" name="rating" id="rating" placeholder="Indicar valor entre 0 y 10"/>
+                    <p class="errorText">Calificacion debe ser un numero entero entre 0 - 10</p>
+                </div>
+                <label for="awards">Premios </label>
+                <div>
+                    <input type="number" name="awards" id="awards" placeholder="Indicar valor entre 0 y 10"/>
+                    <p class="errorText">Premios debe ser un numero entero entre 0 - 10</p>
+                </div>
+                <label for="release_date">Fecha de creación </label>
+                <div>
+                    <input type="date" name="release_date" id="release_date"/>
+                    <p class="errorText">La fecha debe ser un formato valido dd-mm-aaaa</p>
+                </div>
+                <label for="length">Duración </label>
+                <div>
+                    <input type="number" name="length" id="length" placeholder="Indicar duración entre 60 y 360 minutos"/>
+                    <p class="errorText">La duracion debe ser entre 60 y 360</p>
+                </div>
+                <label for="genreID">Género </label>
+                <div>
+                    <select name="genre_id" id="genre_id"  class="genre_id">
+                        <option value="" disabled selected>- Seleccione el género - </option>
+                        <% allGenres.forEach(genre => { %>
+                        <option value="<%= genre.id %>"><%= genre.name %></option>
+                        <% }); %>
+                    </select>
+                    <p class="errorText">Debe elegir un genero</p>
+                </div>
+                <br>
+                <div class="button-container"> <button class="botonAgregar" type="submit">Agregar</button>
+                
+                <a  class="botonVolver" href="/movies">Listado de Películas</a></div>
+            </form>
+        </article>
+    </section>
+</body>
+</html>
