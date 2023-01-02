@@ -6,18 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Películas</title>
     <link rel='stylesheet' href='/css/style.css' />
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" id="sweetAlert"></script>
 </head>
-<% if (typeof movie != "undefined") { %>
- <script>
-    Swal.fire(
-    "La película se guardó satisfactoriamente",
-    '<%= newMovie %>',
-    'success'
-    );
- </script>
-<% } %>
+
 <body>
+    <% if (typeof movie != "undefined") { %>
+        <script>
+            Swal.fire(
+            "La película se guardó satisfactoriamente",
+            " ",
+            'success'
+            );
+        </script>
+       <% } %>
+       <% if (deleted == "true") { %>
+           <script>
+                  Swal.fire(
+                  "Pelicula eliminada exitosamente!",
+                  " ",
+                  'success'
+                  );
+           </script>
+          <% } %>
     <figure>
         <img src="/img/logo-DH.png" alt="Logo Digital House">
     </figure>

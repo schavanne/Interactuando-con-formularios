@@ -13,11 +13,12 @@ const Actors = db.Actor;
 
 const moviesController = {
     'list': (req, res) => {
+        let deleted = req.query.deleted ?? "false";
         db.Movie.findAll({
             include: ['genre']
         })
             .then(movies => {
-                res.render('moviesList.ejs',{movies})
+                res.render('moviesList.ejs',{movies,deleted})
             })
     },
     'listNew': (req, res) => {
@@ -26,16 +27,17 @@ const moviesController = {
         })
             .then(movies => {
 
-                res.render('moviesList.ejs', {movies,movie:req.query.newMovie})
+                res.render('moviesList.ejs', {movies,movie:"new"})
             })
     },
     'detail': (req, res) => {
+        let edited = req.query.edited ?? "false";
         db.Movie.findByPk(req.params.id,
             {
                 include : ['genre']
             })
             .then(movie => {
-                res.render('moviesDetail.ejs', {movie});
+                res.render('moviesDetail.ejs', {movie,edited});
             });
     },
     'new': (req, res) => {
@@ -87,7 +89,7 @@ const moviesController = {
             }
         )
         .then(()=> {
-            return res.redirect('/movies/newMovie/'+title)})            
+            return res.redirect('/movies/newMovie/')})            
         .catch(error => res.send(error))
     },
     edit: function(req,res) {
@@ -102,7 +104,7 @@ const moviesController = {
             Movie.release_date = moment(Movie.release_date).locale('es-us').format('YYYY-MM-DD');
             //new Date("Sun Jan 03 1999 21:00:00 GMT-0300 (hora estándar de Argentina)").toLocaleDateString()
             //return res.send(Movie.release_date);
-            return res.render(path.resolve(__dirname, '..', 'views',  'moviesEdit'), {Movie,allGenres,allActors})})
+            return res.render(path.resolve(__dirname, '..', 'views',  'moviesAdd'), {Movie,allGenres,allActors})})
         .catch(error => res.send(error))
     },
     update: function (req,res) {
@@ -121,7 +123,7 @@ const moviesController = {
                 where: {id: movieId}
             })
         .then(()=> {
-            return res.redirect('/movies')})            
+            return res.redirect('/movies/detail/'+movieId+"?edited=true")})            
         .catch(error => res.send(error))
     },
     delete: function (req,res) {
@@ -137,7 +139,7 @@ const moviesController = {
         Movies
         .destroy({where: {id: movieId}, force: true}) // force: true es para asegurar que se ejecute la acción
         .then(()=>{
-            return res.redirect('/movies')})
+            return res.redirect('/movies?deleted=true')})
         .catch(error => res.send(error)) 
     }
 }

@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= movie.title %> </title>
     <link rel='stylesheet' href='/css/style.css' />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" id="sweetAlert"></script>
 
 </head>
+
 <body>
+    <% if (edited == "true") { %>
+        <script>
+               Swal.fire(
+               "Pelicula editada exitosamente!",
+               " ",
+               'success'
+               );
+        </script>
+       <% } %>
     <figure>
         <img src="/img/logo-DH.png" alt="Logo Digital House">
     </figure>
