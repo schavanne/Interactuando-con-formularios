@@ -108,6 +108,7 @@ const moviesAPIController = {
     },
     update: (req,res) => {
         let movieId = req.params.id;
+        
         Movies.update(
             {
                 title: req.body.title,

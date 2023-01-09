@@ -19,7 +19,7 @@
             );
         </script>
        <% } %>
-       <% if (deleted == "true") { %>
+       <% if (typeof deleted != "undefined" && deleted == "true") { %>
            <script>
                   Swal.fire(
                   "Pelicula eliminada exitosamente!",

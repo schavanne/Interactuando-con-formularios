@@ -37,7 +37,7 @@ const moviesController = {
                 include : ['genre']
             })
             .then(movie => {
-                res.render('moviesDetail.ejs', {movie,edited});
+                res.render('moviesDetail.ejs', {movie,edited,moment:moment});
             });
     },
     'new': (req, res) => {
@@ -93,6 +93,7 @@ const moviesController = {
         .catch(error => res.send(error))
     },
     edit: function(req,res) {
+        
         let movieId = req.params.id;
         let promMovies = Movies.findByPk(movieId,{include: ['genre','actors']});
         let promGenres = Genres.findAll();
@@ -108,6 +109,7 @@ const moviesController = {
         .catch(error => res.send(error))
     },
     update: function (req,res) {
+        console.log(req.body.release_date);
         let movieId = req.params.id;
         Movies
         .update(

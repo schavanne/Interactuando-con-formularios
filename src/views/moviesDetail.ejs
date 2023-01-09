@@ -27,7 +27,7 @@
     <p>CALIFICACIÓN: <%= movie.rating %> </p>
     <p>PREMIOS: <%= movie.awards %> </p>
     <p>DURACIÓN: <%= movie.length + ' min'%> </p>
-    <p>FECHA DE CREACIÓN: <%= movie.release_date %> </p>
+    <p>FECHA DE CREACIÓN: <%= moment(movie.release_date).format("DD-MM-YYYY"); %> </p>
     <br>
     <section>
         <a class="botonModificar" href="/movies/edit/<%= movie.id %>">Modificar</a>
